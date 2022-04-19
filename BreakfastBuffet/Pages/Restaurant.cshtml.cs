@@ -39,7 +39,7 @@ namespace BreakfastBuffet.Pages
             //**************Children************************//
             int numberOfChildrenAlreadyCheckedIn = 0;
 
-            foreach (Children chilren in roomCheckIn2.Children)
+            foreach (Child chilren in roomCheckIn2.Children)
             {
                 if (chilren.CheckedIn == true)
                 {
