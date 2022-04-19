@@ -18,7 +18,7 @@ namespace BreakfastBuffet.Pages
         {
         }
         
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             Reservation reservation = new Reservation();
 
@@ -32,16 +32,24 @@ namespace BreakfastBuffet.Pages
                 reservation.Children.Add(new Child());
             }
 
-            _context.reservation.Add
+            reservation.Date = Input.Date;
+
+            _context.Reservation.Add(reservation);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("Reception");
         }
+        
         
         [BindProperty]
         public InputModel? Input { get; set; } = new InputModel();
 
         public class InputModel
         {
+            //[Required]
+            //public DateOnly Date { get; set; }
             [Required]
-            public DateOnly Date { get; set; }
+            public DateTime Date { get; set; }
 
             [Required]
             [Range(1, int.MaxValue, ErrorMessage = "Only positive numbers above 0 allowed")]

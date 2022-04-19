@@ -28,7 +28,7 @@ namespace BreakfastBuffet.Pages
 
         public IActionResult OnPost()
         {
-            var roomCheckIn2 = _context.reservation.Find(Input.RoomNr);
+            var roomCheckIn2 = _context.Reservation.Find(Input.RoomNr);
 
             if(roomCheckIn2 == null)
             {

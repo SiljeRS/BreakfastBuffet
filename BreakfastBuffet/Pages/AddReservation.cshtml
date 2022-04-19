@@ -9,7 +9,7 @@
 
     <div class="form-group">
         <label asp-for="Input.Date"></label>
-        <input class="form-control" type="date" asp-for="Input.Date" />
+        <input class="form-control" type="date" value="@DateTime.Now" asp-for="Input.Date" />
         <span asp-validation-for="Input.Date" class="text-danger"></span>
     </div>
 
