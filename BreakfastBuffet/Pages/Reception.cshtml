@@ -2,3 +2,16 @@
 @model BreakfastBuffet.Pages.ReceptionModel
 @{
 }
+
+<h2>Reception</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Input.Name"></label>
+        <input class="form-control" asp-for="Input.Name" />
+        <span asp-validation-for="Input.Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+</form>
+
