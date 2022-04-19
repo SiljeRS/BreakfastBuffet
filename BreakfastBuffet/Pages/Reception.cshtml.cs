@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using BreakfastBuffet.Data;
 using BreakfastBuffet.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace BreakfastBuffet.Pages
 {
@@ -16,15 +17,6 @@ namespace BreakfastBuffet.Pages
         public void OnGet()
         {
         }
-
-        [BindProperty]
-        public InputModel? Input { get; set; } = new InputModel();
-
-        public class InputModel
-        {
-            [Required]
-            public DateTime DateTime { get; set; }
-            public int NAdults { get; set; }
-        }
+   
     }
 }

@@ -5,13 +5,10 @@
 
 <h2>Reception</h2>
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Input.DateTime"></label>
-        <input class="form-control" asp-for="Input.DateTime" />
-        <span asp-validation-for="Input.DateTime" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <div asp-validation-summary="All" class="text-danger"></div>
-</form>
+<p>
+    <a asp-page="AddReservation">Add Reservation</a>
+</p>
 
+<p>
+    <a asp-page="BreakfastOverview">Breakfast overview</a>
+</p>

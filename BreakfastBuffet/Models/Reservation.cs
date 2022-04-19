@@ -10,5 +10,7 @@ namespace BreakfastBuffet.Models
 
         public int NrOfChildren { get; set; } = 0;
 
+        public DateOnly Date { get; set; }
+
     }
 }
