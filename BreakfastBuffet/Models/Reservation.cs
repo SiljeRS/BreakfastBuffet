@@ -10,7 +10,7 @@ namespace BreakfastBuffet.Models
 
         public List<Adult> Adults { get; set; } = null;
 
-        public List<Children> Children { get; set; } = null;
+        public List<Child> Children { get; set; }
 
         //[Column(TypeName="Date")]
         public DateTime Date { get; set; }
