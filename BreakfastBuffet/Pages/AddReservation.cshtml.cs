@@ -31,6 +31,8 @@ namespace BreakfastBuffet.Pages
             {
                 reservation.Children.Add(new Child());
             }
+
+            _context.reservation.Add
         }
         
         [BindProperty]
