@@ -1,4 +1,34 @@
-﻿@page
+﻿page
 @model BreakfastBuffet.Pages.RestaurantModel
 @{
+      ViewData["Title"] = "Restaurant";
 }
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome Waiter</h1>
+</div>
+
+<h3>Check in guest for breakfast</h3>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Input.RoomNr"></label>
+        <input class="form-control" asp-for="Input.RoomNr" />
+        <span asp-validation-for="Input.RoomNr" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.NrOfAdults"></label>
+        <input class="form-control" asp-for="Input.NrOfAdults" />
+        <span asp-validation-for="Input.NrOfAdults" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.NrOfChildren"></label>
+        <input class="form-control" asp-for="Input.NrOfChildren" />
+        <span asp-validation-for="Input.NrOfChildren" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+</form>
+
+
