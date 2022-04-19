@@ -12,8 +12,7 @@ namespace BreakfastBuffet.Models
 
          public int NrChildren { get; set; }
 
-        //public DateOnly Date { get; set; }
-        public DateTime Date { get; set; }
+        //public DateTime Date { get; set; }
 
     }
 }

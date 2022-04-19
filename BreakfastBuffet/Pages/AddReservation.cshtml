@@ -15,27 +15,13 @@
 
     <div class="form-group">
         <label asp-for="Input.Adults"></label>
-        <!-- <input class="form-control" type="number" asp-for="Input.Adults" /> -->
-        <select class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
+        <input class="form-control" type="number" asp-for="Input.Adults" value="1" min="1" />
         <span asp-validation-for="Input.Adults" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Input.Children"></label>
-        <!-- <input class="form-control" type="number" asp-for="Input.Children" /> -->
-        <select class="form-control">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-        </select>
+        <input class="form-control" type="number" asp-for="Input.Children" min="0"/>
         <span asp-validation-for="Input.Children" class="text-danger"></span>
     </div>
 
