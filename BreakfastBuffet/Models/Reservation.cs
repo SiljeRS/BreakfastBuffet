@@ -8,7 +8,7 @@ namespace BreakfastBuffet.Models
 
         public List<Adult> Adults { get; set; }
 
-        public List<Children> Children { get; set; }
+        public List<Child> Children { get; set; }
 
         public DateOnly Date { get; set; }
 

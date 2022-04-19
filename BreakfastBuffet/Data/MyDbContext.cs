@@ -19,6 +19,6 @@ namespace BreakfastBuffet.Data
 
         public DbSet<Adult> adult => Set<Adult>();
 
-        public DbSet<Children> children => Set<Children>();
+        public DbSet<Child> children => Set<Child>();
     }
 }

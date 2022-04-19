@@ -17,12 +17,22 @@ namespace BreakfastBuffet.Pages
         public void OnGet()
         {
         }
-        /*
+        
         public IActionResult OnPost()
         {
-            var breakfastDate _context.Reservation
+            Reservation reservation = new Reservation();
+
+            for(int i = 0; i < Input.Adults; i++)
+            {
+                reservation.Adults.Add(new Adult());
+            }
+
+            for (int i = 0; i < Input.Children; i++)
+            {
+                reservation.Children.Add(new Child());
+            }
         }
-        */
+        
         [BindProperty]
         public InputModel? Input { get; set; } = new InputModel();
 
