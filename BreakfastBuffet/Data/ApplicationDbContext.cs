@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿/*using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BreakfastBuffet.Data
@@ -10,4 +10,4 @@ namespace BreakfastBuffet.Data
         {
         }
     }
-}
+}*/
