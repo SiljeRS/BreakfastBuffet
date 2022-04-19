@@ -6,9 +6,9 @@ namespace BreakfastBuffet.Models
         public int Id { get; set; }
         public int RoomNr { get; set; } = 0;
 
-        public int NrOfAdults { get; set; } = 0;
+        public List<Adult> Adults { get; set; }
 
-        public int NrOfChildren { get; set; } = 0;
+        public List<Children> Children { get; set; }
 
         public DateOnly Date { get; set; }
 

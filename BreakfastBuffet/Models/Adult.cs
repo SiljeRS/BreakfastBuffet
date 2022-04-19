@@ -1,8 +1,8 @@
 ﻿namespace BreakfastBuffet.Models
 {
-    public class CheckIn
+    public class Adult
     {
         public int Id { get; set; }
-        public List<Reservation> Reservations{ get; set; }
+        public bool CheckedIn { get; set; }= false;
     }
 }
