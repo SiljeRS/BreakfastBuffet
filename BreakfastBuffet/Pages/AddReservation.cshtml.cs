@@ -20,24 +20,35 @@ namespace BreakfastBuffet.Pages
         
         public async Task<IActionResult> OnPost()
         {
-            Reservation reservation = new Reservation();
 
-            for(int i = 0; i < Input.Adults; i++)
+            var tempBreakfast = _context.Breakfast.Where(x => x.Date == Input.Date).FirstOrDefault();
+            if (tempBreakfast != null)
             {
-                reservation.Adults.Add(new Adult());
+                tempBreakfast.NChildren = Input.Children;
+                tempBreakfast.NAdults = Input.Adults;
+            }
+            else
+            {
+                Breakfast breakfast = new Breakfast();
+
+                breakfast.Date = Input.Date;
+                if (Input.Date < DateTime.Now)
+                {
+                    ModelState.AddModelError("Input.Date", "Date must be in the future");
+                    return Page();
+                }
+
+                breakfast.NChildren = Input.Children;
+                breakfast.NAdults = Input.Adults;
+
+                _context.Breakfast.Add(breakfast);
             }
 
-            for (int i = 0; i < Input.Children; i++)
-            {
-                reservation.Children.Add(new Child());
-            }
-
-            reservation.Date = Input.Date;
-
-            _context.Reservation.Add(reservation);
+            
             await _context.SaveChangesAsync();
 
             return RedirectToPage("Reception");
+            
         }
         
         
@@ -46,8 +57,6 @@ namespace BreakfastBuffet.Pages
 
         public class InputModel
         {
-            //[Required]
-            //public DateOnly Date { get; set; }
             [Required]
             public DateTime Date { get; set; }
 
