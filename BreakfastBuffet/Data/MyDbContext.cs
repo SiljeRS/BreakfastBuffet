@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using BreakfastBuffet.Models;
 
 namespace BreakfastBuffet.Data
 {
@@ -11,5 +12,7 @@ namespace BreakfastBuffet.Data
         {
 
         }
+
+        public DbSet<Breakfast> Breakfast => Set<Breakfast>();
     }
 }
