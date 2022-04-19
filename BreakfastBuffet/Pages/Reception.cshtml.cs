@@ -20,8 +20,8 @@ namespace BreakfastBuffet.Pages
 
         public class InputModel
         {
-            [Required]
-            public string Name { get; set; }
+            /*[Required]
+            public string Name { get; set; }*/
         }
     }
 }
