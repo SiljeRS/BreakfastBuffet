@@ -29,7 +29,7 @@ namespace BreakfastBuffet.Pages
         public class InputModel
         {
             [Required]
-            public DateOnly Date { get; set; }
+            public DateTime Date { get; set; }
 
             [Required]
             [Range(1, int.MaxValue, ErrorMessage = "Only positive numbers above 0 allowed")]
