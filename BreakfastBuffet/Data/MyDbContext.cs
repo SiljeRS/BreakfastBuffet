@@ -13,6 +13,6 @@ namespace BreakfastBuffet.Data
 
         }
 
-        public DbSet<Breakfast> Breakfast => Set<Breakfast>();
+        public DbSet<Reservation> Reservation => Set<Reservation>();
     }
 }
