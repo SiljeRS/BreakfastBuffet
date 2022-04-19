@@ -14,23 +14,18 @@
 <form method="post">
     <div class="form-group">
         <label asp-for="Input.RoomNr"></label>
-        <input class="form-control" asp-for="Input.RoomNr" />
+        <input class="form-control" asp-for="Input.RoomNr" min="1" />
         <span asp-validation-for="Input.RoomNr" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Input.NrOfAdults"></label>
-        <input class="form-control" asp-for="Input.NrOfAdults" />
+        <input class="form-control" asp-for="Input.NrOfAdults" min="0"/>
         <span asp-validation-for="Input.NrOfAdults" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Input.NrOfChildren"></label>
-        <input class="form-control" asp-for="Input.NrOfChildren" />
+        <input class="form-control" asp-for="Input.NrOfChildren" min="0" />
         <span asp-validation-for="Input.NrOfChildren" class="text-danger"></span>
-    </div>
-        <div class="form-group">
-        <label asp-for="Input.Date"></label>
-        <input class="form-control" type="date" asp-for="Input.Date" />
-        <span asp-validation-for="Input.Date" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

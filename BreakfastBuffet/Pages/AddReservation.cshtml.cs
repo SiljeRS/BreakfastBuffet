@@ -29,7 +29,7 @@ namespace BreakfastBuffet.Pages
 
             for (int i = 0; i < Input.Children; i++)
             {
-                reservation.Children.Add(new Child());
+                reservation.Childen.Add(new Child());
             }
 
             reservation.Date = Input.Date;
