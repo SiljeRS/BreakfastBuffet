@@ -5,6 +5,8 @@ using BreakfastBuffet.Models;
 using BreakfastBuffet.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
+using BreakfastBuffet.Hubs;
 
 namespace BreakfastBuffet.Pages
 {
@@ -15,13 +17,14 @@ namespace BreakfastBuffet.Pages
         public InputModel? Input { get; set; } = new InputModel();
 
         private readonly MyDbContext _context;
-        //CheckInOverview myCheckInOverview = new CheckInOverview();
+        private readonly IHubContext<KitchenHub, IKitchen> _kitchenHubContext;
+ 
 
-        public RestaurantModel(MyDbContext context)
+        public RestaurantModel(MyDbContext context, IHubContext<KitchenHub, IKitchen> kitchenHubContext)
         {
             _context = context;
-            //_myCheckInOverview = new CheckInOverview();
-            
+            _kitchenHubContext = kitchenHubContext;
+
         }
 
         public void OnGet()
@@ -29,7 +32,7 @@ namespace BreakfastBuffet.Pages
             Input = new InputModel();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             Reservation reservation = new Reservation();
 
@@ -45,8 +48,6 @@ namespace BreakfastBuffet.Pages
                 myCheckInOverview.reservationsCheckedIn = new List<Reservation>();
                 myCheckInOverview.Date = DateTime.Now;
                 _context.CheckInOverview.Add(myCheckInOverview);
-
-                Console.WriteLine("Den er null");
             }
 
             myCheckInOverview.reservationsCheckedIn.Add(reservation);
@@ -59,7 +60,7 @@ namespace BreakfastBuffet.Pages
             }
 
             // SIGNALR
-            //await _expenseHubContext.Clients.All.ExpenseUpdate(expense);
+            await _kitchenHubContext.Clients.All.KitchenInfoUpdate();
 
 
             return RedirectToPage("Succes");

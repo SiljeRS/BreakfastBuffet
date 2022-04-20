@@ -5,17 +5,23 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.SignalR;
 using BreakfastBuffet.Hubs;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using BreakfastBuffet.Models;
 
 namespace BreakfastBuffet.Pages
 {
     public class KitchenModel : PageModel
     {
-        /* 
         private readonly IHubContext<KitchenHub, IKitchen> _kitchenHubContext;
         private readonly MyDbContext _context;
 
-        public int _amountOfAdults;
-        public int _amountOfChildren;
+        public int _expectedAmountOfAdults;
+        public int _expectedAmountOfChildren;
+        public int _expectedAmountOfPeople;
+
+        public int _amountOfAdultsCheckedIn;
+        public int _amountOfChildrenCheckedIn;
+
 
         public KitchenModel(MyDbContext context, IHubContext<KitchenHub, IKitchen> _kitchenHubContext)
         {
@@ -25,8 +31,23 @@ namespace BreakfastBuffet.Pages
 
         public void OnGet()
         {
-            var _amountOfAdult = _context.Breakfast.Where(p => p.Date.Day == DateTime.Now.Day).FirstOrDefault();
-            _amountOfChildren;
+            //Expected
+            var myBreakfast = _context.Breakfast.Where(p => p.Date.Day == DateTime.Now.Day).FirstOrDefault();
+            _expectedAmountOfAdults = myBreakfast.NAdults;
+            _expectedAmountOfChildren = myBreakfast.NChildren;
+
+            _expectedAmountOfPeople = _expectedAmountOfAdults + _expectedAmountOfChildren;
+
+            //Checked In 
+            var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == DateTime.Now.Day).Include(x => x.reservationsCheckedIn).FirstOrDefault();
+            
+            foreach (Reservation reservation in myCheckInOverview.reservationsCheckedIn)
+            {
+                _amountOfAdultsCheckedIn += reservation.NrAdults;
+                _amountOfChildrenCheckedIn += reservation.NrChildren;
+            }
+
+
         }
 
         [BindProperty]

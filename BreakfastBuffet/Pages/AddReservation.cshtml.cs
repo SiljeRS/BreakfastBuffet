@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using BreakfastBuffet.Data;
 using BreakfastBuffet.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.SignalR;
 using BreakfastBuffet.Hubs;
 
 namespace BreakfastBuffet.Pages
@@ -11,9 +12,11 @@ namespace BreakfastBuffet.Pages
     public class AddReservationModel : PageModel
     {
         private readonly MyDbContext _context;
-        public AddReservationModel(MyDbContext context)
+        private readonly IHubContext<KitchenHub, IKitchen> _kitchenHubContext;
+        public AddReservationModel(MyDbContext context, IHubContext<KitchenHub, IKitchen> kitchenHubContext)
         {
             _context = context;
+            _kitchenHubContext = kitchenHubContext;
         }
         public void OnGet()
         {
@@ -48,8 +51,7 @@ namespace BreakfastBuffet.Pages
             
             await _context.SaveChangesAsync();
 
-            // SIGNALR
-            await _expenseHubContext.Clients.All.ExpenseUpdate(expense);
+            await _kitchenHubContext.Clients.All.KitchenInfoUpdate();
 
             return RedirectToPage("Reception");
             

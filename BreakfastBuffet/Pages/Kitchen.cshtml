@@ -2,28 +2,49 @@
 @model BreakfastBuffet.Pages.KitchenModel
 @{
 }
-<!--
 
-<div class="text-center">
-    <h1 class="display-4">Welcome Kitchen worker</h1>
-</div>
+<h2>Kitchen Overview</h2>
 
-<h3>View kitchen data, type date</h3>
+    <table>
+         <thead>
+            <tr>
+              <th>Expected amount of people</th>
+            </tr>
+         </thead>
+         <tbody>
+                 <tr>
+                       <td>Amounts in total:</td> 
+                       <td>@Html.DisplayFor(x => x._expectedAmountOfPeople)</td>
+                 </tr>
+                <tr>
+                       <td>Amount of adults:</td> 
+                       <td>@Html.DisplayFor(x => x._expectedAmountOfAdults)</td>
+                 </tr>
+                 <tr>
+                      <td>Amount of children:</td> 
+                       <td>@Html.DisplayFor(x => x._expectedAmountOfChildren)</td>
+                </tr>
+          </tbody>
+          </table>
 
-<form method="post">
-       <div class="form-group">
-        <label asp-for="Input.Date"></label>
-        <input class="form-control" type="date" value="@DateTime.Now" asp-for="Input.Date" />
-        <span asp-validation-for="Input.Date" class="text-danger"></span>
-    </div>
+        <table>
+         <thead>
+            <tr>
+              <th>People checked in</th>
+            </tr>
+         </thead>
+         <tbody>
+                <tr>
+                       <td>Amount of adults:</td> 
+                       <td>@Html.DisplayFor(x => x._amountOfAdultsCheckedIn)</td>
+                 </tr>
+                 <tr>
+                      <td>Amount of children:</td> 
+                      <td>@Html.DisplayFor(x => x._amountOfChildrenCheckedIn)</td>
+                </tr>
+          </tbody>
+            </table>
 
-    <button type="submit" class="btn btn-primary">Show</button>
-    <div asp-validation-summary="All" class="text-danger"></div>
-</form>
+<script src ="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src ="~/js/kitchenInfo.js"></script>
 
-
-    -->
-
-     <!--
-<script src ="~/js/signalr/dist/browser/signalr.js"></script>
-<script src ="~/js/chat.js"></script>-->
