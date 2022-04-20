@@ -10,8 +10,7 @@ namespace BreakfastBuffet.Pages
 {
     public class KitchenModel : PageModel
     {
-        /*
-        private readonly IHubContext<KitchenHub, IKitchen> _kitchenHubContext;
+        /* private readonly IHubContext<KitchenHub, IKitchen> _kitchenHubContext;
         private readonly MyDbContext _context;
 
         public int _amountOfAdults;
@@ -25,7 +24,7 @@ namespace BreakfastBuffet.Pages
 
         public void OnGet()
         {
-            _amountOfAdult = 
+            var _amountOfAdult = _context.Breakfast.Where(p => p.Date.Day == DateTime.Now.Day).FirstOrDefault();
             _amountOfChildren;
         }
 
@@ -39,6 +38,5 @@ namespace BreakfastBuffet.Pages
 
             
         }
-        */
     }
 }
