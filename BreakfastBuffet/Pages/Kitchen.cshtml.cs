@@ -22,24 +22,34 @@ namespace BreakfastBuffet.Pages
         public int _amountOfAdultsCheckedIn;
         public int _amountOfChildrenCheckedIn;
 
+        public DateTime _Recentdate = DateTime.Now;
 
-        public KitchenModel(MyDbContext context, IHubContext<KitchenHub, IKitchen> _kitchenHubContext)
+
+        public KitchenModel(MyDbContext context, IHubContext<KitchenHub, IKitchen> kitchenHubContext)
         {
             _context = context;
-            _kitchenHubContext = _kitchenHubContext;
+            _kitchenHubContext = kitchenHubContext;
         }
 
+        public void OnPost()
+        {
+
+            _kitchenHubContext.Clients.All.KitchenInfoUpdate();
+
+        }
+        
         public void OnGet()
         {
             //Expected
-            var myBreakfast = _context.Breakfast.Where(p => p.Date.Day == DateTime.Now.Day).FirstOrDefault();
+            var myBreakfast = _context.Breakfast.Where(p => p.Date.Day == _Recentdate.Day).FirstOrDefault();
+        
             _expectedAmountOfAdults = myBreakfast.NAdults;
             _expectedAmountOfChildren = myBreakfast.NChildren;
 
             _expectedAmountOfPeople = _expectedAmountOfAdults + _expectedAmountOfChildren;
 
             //Checked In 
-            var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == DateTime.Now.Day).Include(x => x.reservationsCheckedIn).FirstOrDefault();
+            var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == _Recentdate.Day).Include(x => x.reservationsCheckedIn).FirstOrDefault();
             
             foreach (Reservation reservation in myCheckInOverview.reservationsCheckedIn)
             {
@@ -49,6 +59,7 @@ namespace BreakfastBuffet.Pages
 
 
         }
+        
 
         [BindProperty]
         public InputModel? Input { get; set; } = new InputModel();
@@ -56,10 +67,10 @@ namespace BreakfastBuffet.Pages
         public class InputModel
         {
             [Required]
-            public DateTime Date { get; set; }
+            public DateTime Date { get; set; } = DateTime.Now;
 
-            
+   
         }
-        
+        */
     }
 }

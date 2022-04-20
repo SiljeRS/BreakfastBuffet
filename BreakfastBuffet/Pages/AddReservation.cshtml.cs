@@ -49,7 +49,7 @@ namespace BreakfastBuffet.Pages
             }
 
             
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             await _kitchenHubContext.Clients.All.KitchenInfoUpdate();
 
