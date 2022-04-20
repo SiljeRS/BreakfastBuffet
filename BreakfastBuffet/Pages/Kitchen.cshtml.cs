@@ -10,7 +10,8 @@ namespace BreakfastBuffet.Pages
 {
     public class KitchenModel : PageModel
     {
-        /* private readonly IHubContext<KitchenHub, IKitchen> _kitchenHubContext;
+        /* 
+        private readonly IHubContext<KitchenHub, IKitchen> _kitchenHubContext;
         private readonly MyDbContext _context;
 
         public int _amountOfAdults;
@@ -38,5 +39,6 @@ namespace BreakfastBuffet.Pages
 
             
         }
+        */
     }
 }
