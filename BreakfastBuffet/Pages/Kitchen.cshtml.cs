@@ -1,3 +1,4 @@
+
 using BreakfastBuffet.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,6 +10,7 @@ namespace BreakfastBuffet.Pages
 {
     public class KitchenModel : PageModel
     {
+        /*
         private readonly IHubContext<KitchenHub, IKitchen> _kitchenHubContext;
         private readonly MyDbContext _context;
 
@@ -37,5 +39,6 @@ namespace BreakfastBuffet.Pages
 
             
         }
+        */
     }
 }
