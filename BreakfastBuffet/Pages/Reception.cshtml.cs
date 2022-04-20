@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BreakfastBuffet.Pages
 {
-    [Authorize(Policy = "ReceptionOnly")]
+    //[Authorize(Policy = "ReceptionOnly")]
     public class ReceptionModel : PageModel
     {
         private readonly MyDbContext _context;

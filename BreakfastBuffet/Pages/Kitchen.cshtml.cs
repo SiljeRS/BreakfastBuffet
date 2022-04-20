@@ -22,7 +22,7 @@ namespace BreakfastBuffet.Pages
         public int _amountOfAdultsCheckedIn;
         public int _amountOfChildrenCheckedIn;
 
-        public DateTime _Recentdate = DateTime.Now;
+        //public DateTime _Recentdate = DateTime.Now;
 
 
         public KitchenModel(MyDbContext context, IHubContext<KitchenHub, IKitchen> kitchenHubContext)
@@ -31,26 +31,47 @@ namespace BreakfastBuffet.Pages
             _kitchenHubContext = kitchenHubContext;
         }
 
-        public void OnPost()
-        {
-
-            _kitchenHubContext.Clients.All.KitchenInfoUpdate();
-
-        }
-        
-        public void OnGet()
+        public async Task OnPost()
         {
             //Expected
-            var myBreakfast = _context.Breakfast.Where(p => p.Date.Day == _Recentdate.Day).FirstOrDefault();
-        
+            //var myBreakfast = _context.Breakfast.Where(p => p.Date.Day == Input.Date.Day).FirstOrDefault();
+            var myBreakfast = await GetBreakfast(Input.Date);
+
             _expectedAmountOfAdults = myBreakfast.NAdults;
             _expectedAmountOfChildren = myBreakfast.NChildren;
 
             _expectedAmountOfPeople = _expectedAmountOfAdults + _expectedAmountOfChildren;
 
             //Checked In 
-            var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == _Recentdate.Day).Include(x => x.reservationsCheckedIn).FirstOrDefault();
-            
+            //var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == Input.Date.Day).Include(x => x.reservationsCheckedIn).FirstOrDefault();
+            var myCheckInOverview = await GetCheckinOverview(Input.Date);
+
+            foreach (Reservation reservation in myCheckInOverview.reservationsCheckedIn)
+            {
+                _amountOfAdultsCheckedIn += reservation.NrAdults;
+                _amountOfChildrenCheckedIn += reservation.NrChildren;
+            }
+
+
+            //_kitchenHubContext.Clients.All.KitchenInfoUpdate();
+
+        }
+        
+        public async Task OnGet()
+        {
+            //Expected
+            //var myBreakfast = _context.Breakfast.Where(p => p.Date.Day == DateTime.Now.Day).FirstOrDefault();
+            var myBreakfast = await GetBreakfast(Input.Date);
+
+            _expectedAmountOfAdults = myBreakfast.NAdults;
+            _expectedAmountOfChildren = myBreakfast.NChildren;
+
+            _expectedAmountOfPeople = _expectedAmountOfAdults + _expectedAmountOfChildren;
+
+            //Checked In 
+            //var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == _Recentdate.Day).Include(x => x.reservationsCheckedIn).FirstOrDefault();
+            var myCheckInOverview = await GetCheckinOverview(DateTime.Now);
+
             foreach (Reservation reservation in myCheckInOverview.reservationsCheckedIn)
             {
                 _amountOfAdultsCheckedIn += reservation.NrAdults;
@@ -60,10 +81,25 @@ namespace BreakfastBuffet.Pages
 
         }
         
+        private async Task<Breakfast?> GetBreakfast(DateTime date)
+        {
+            return await _context.Breakfast
+                .Where(p => p.Date.Day == date.Day)
+                .FirstOrDefaultAsync();
+        }
 
+        private async Task<CheckInOverview?> GetCheckinOverview(DateTime date)
+        {
+            return await _context.CheckInOverview
+                .Where(p => p.Date.Day == date.Day)
+                .Include(x => x.reservationsCheckedIn)
+                .FirstOrDefaultAsync();
+        }
+
+        
         [BindProperty]
         public InputModel? Input { get; set; } = new InputModel();
-
+        
         public class InputModel
         {
             [Required]
@@ -71,6 +107,7 @@ namespace BreakfastBuffet.Pages
 
    
         }
-        */
+        
+        
     }
 }
