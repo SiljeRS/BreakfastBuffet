@@ -13,6 +13,18 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<MyDbContext>();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ReceptionOnly",
+        policyBuilder => policyBuilder
+        .RequireClaim("ReceptionNumber"));
+
+    options.AddPolicy("RestaurantOnly",
+        policyBuilder => policyBuilder
+        .RequireClaim("RestaurantNumber"));
+});
+
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
 
