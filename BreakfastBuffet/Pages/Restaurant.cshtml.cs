@@ -15,7 +15,7 @@ namespace BreakfastBuffet.Pages
         public InputModel? Input { get; set; } = new InputModel();
 
         private readonly MyDbContext _context;
-        CheckInOverview myCheckInOverview = new CheckInOverview();
+        //CheckInOverview myCheckInOverview = new CheckInOverview();
 
         public RestaurantModel(MyDbContext context)
         {
@@ -36,8 +36,23 @@ namespace BreakfastBuffet.Pages
             reservation.NrChildren = Input.NrOfChildren;
             reservation.NrAdults = Input.NrOfAdults;
 
-            //Tilføjer til liste er checkIns
+            var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == DateTime.Now.Day).FirstOrDefault();
+            if(myCheckInOverview == null)
+            {
+                myCheckInOverview = new CheckInOverview();
+                myCheckInOverview.reservationsCheckedIn = new List<Reservation>();
+            }
+
             myCheckInOverview.reservationsCheckedIn.Add(reservation);
+
+            _context.SaveChanges();
+
+
+
+            //_context.CheckInOverview.reservationsCheckedIn.Add(reservation);
+
+            //Tilføjer til liste er checkIns
+            //myCheckInOverview.reservationsCheckedIn.Add(reservation);
 
 
             if (!ModelState.IsValid)

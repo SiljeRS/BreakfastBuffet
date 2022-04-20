@@ -21,5 +21,7 @@ namespace BreakfastBuffet.Data
         public DbSet<Child> children => Set<Child>();
 
         public DbSet<Breakfast> Breakfast => Set<Breakfast>();
+
+        public DbSet<CheckInOverview> CheckInOverview => Set<CheckInOverview>();
     }
 }
