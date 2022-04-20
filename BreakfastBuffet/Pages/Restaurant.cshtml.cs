@@ -20,6 +20,7 @@ namespace BreakfastBuffet.Pages
         public RestaurantModel(MyDbContext context)
         {
             _context = context;
+            _myCheckInOverview = new CheckInOverview();
             
         }
 

@@ -6,7 +6,7 @@ namespace BreakfastBuffet.Hubs
     {
         public async Task KitchenInfoUpdate()
         {
-            //Gør noget herawait Clients.All.ExpenseUpdate(expense);
+            await Clients.All.KitchenInfoUpdate();
         }
     }
 }

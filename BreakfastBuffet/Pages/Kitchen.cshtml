@@ -3,4 +3,24 @@
 @{
 }
 
-<script sfc ="~/js/signalr/dist/browser/signalr.js"></script>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome Kitchen worker</h1>
+</div>
+
+<h3>View kitchen data, type date</h3>
+
+<form method="post">
+       <div class="form-group">
+        <label asp-for="Input.Date"></label>
+        <input class="form-control" type="date" value="@DateTime.Now" asp-for="Input.Date" />
+        <span asp-validation-for="Input.Date" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Show</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+</form>
+
+
+<script src ="~/js/signalr/dist/browser/signalr.js"></script>
+<script src ="~/js/chat.js"></script>
