@@ -1,3 +1,4 @@
+
 using BreakfastBuffet.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -36,6 +37,6 @@ namespace BreakfastBuffet.Pages
             public DateTime Date { get; set; }
 
             
-        }*/
+        }
     }
 }
