@@ -43,6 +43,9 @@ namespace BreakfastBuffet.Pages
             {
                 myCheckInOverview = new CheckInOverview();
                 myCheckInOverview.reservationsCheckedIn = new List<Reservation>();
+                _context.CheckInOverview.Add(myCheckInOverview);
+
+                Console.WriteLine("Den er null");
             }
 
             myCheckInOverview.reservationsCheckedIn.Add(reservation);
@@ -63,7 +66,7 @@ namespace BreakfastBuffet.Pages
 
         public class InputModel
         {
-            //[Required]
+            [Required]
             [Display(Name = "Room number")]
             [Range(0, Double.PositiveInfinity)]
             public int RoomNr { get; set; }
