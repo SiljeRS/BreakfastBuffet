@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using BreakfastBuffet.Data;
 using BreakfastBuffet.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using BreakfastBuffet.Hubs;
 
 namespace BreakfastBuffet.Pages
 {
@@ -48,7 +49,7 @@ namespace BreakfastBuffet.Pages
             await _context.SaveChangesAsync();
 
             // SIGNALR
-           // await _expenseHubContext.Clients.All.ExpenseUpdate(expense);
+            await _expenseHubContext.Clients.All.ExpenseUpdate(expense);
 
             return RedirectToPage("Reception");
             

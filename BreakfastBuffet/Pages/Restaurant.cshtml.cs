@@ -37,7 +37,7 @@ namespace BreakfastBuffet.Pages
             reservation.NrChildren = Input.NrOfChildren;
             reservation.NrAdults = Input.NrOfAdults;
 
-            var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == DateTime.Now.Day).FirstOrDefault();
+            var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == DateTime.Now.Day).Include(x => x.reservationsCheckedIn).FirstOrDefault();
 
             if(myCheckInOverview == null)
             {

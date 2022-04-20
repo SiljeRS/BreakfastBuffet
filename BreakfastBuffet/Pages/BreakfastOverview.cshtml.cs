@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using BreakfastBuffet.Data;
 using BreakfastBuffet.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace BreakfastBuffet.Pages
 {
@@ -14,15 +15,14 @@ namespace BreakfastBuffet.Pages
             _context = context;
         }
 
-        public List<Reservation> CheckInOverviewList { get; set; }
+        public List<Reservation>? CheckInOverviewList { get; set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            CheckInOverviewList = _context.CheckInOverview
+            CheckInOverviewList = await _context.CheckInOverview
                 .Where(x => x.Date.Day == DateTime.Now.Day)
                 .Select(x => x.reservationsCheckedIn)
-                .FirstOrDefault();
-            //if(CheckInOverview == null)
+                .FirstOrDefaultAsync();
         }
     }
 }

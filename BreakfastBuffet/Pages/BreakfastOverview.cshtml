@@ -5,15 +5,36 @@
 
 <h2>Breakfast Overview</h2>
 
-@foreach(var reservation in Model.CheckInOverviewList)
+<table>
+    <thead>
+        <tr>
+            <th>
+                Room Number &nbsp;&nbsp;
+            </th>
+            <th>
+                Adults &nbsp;&nbsp;
+            </th>
+            <th>
+                Children
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var reservation in Model.CheckInOverviewList)
 {
-    <table>
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(x => x.CheckInOverviewList[0].RoomNr)
-                </th>
-            </tr>
-        </thead>
-    </table>
+    <tr>
+            <td>
+                @Html.DisplayFor(modelCheckInOverviewList => reservation.RoomNr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelCheckInOverviewList => reservation.NrAdults)
+            </td>
+            <td>
+                @Html.DisplayFor(modelCheckInOverviewList => reservation.NrChildren)
+            </td>
+        </tr>
 }
+        
+    </tbody>
+</table>
