@@ -12,6 +12,9 @@ namespace BreakfastBuffet.Pages
         private readonly IHubContext<KitchenHub, IKitchen> _kitchenHubContext;
         private readonly MyDbContext _context;
 
+        public int _amountOfAdults;
+        public int _amountOfChildren;
+
         public KitchenModel(MyDbContext context, IHubContext<KitchenHub, IKitchen> _kitchenHubContext)
         {
             _context = context;
@@ -20,6 +23,8 @@ namespace BreakfastBuffet.Pages
 
         public void OnGet()
         {
+            _amountOfAdult = 
+            _amountOfChildren;
         }
 
         [BindProperty]
@@ -29,6 +34,8 @@ namespace BreakfastBuffet.Pages
         {
             [Required]
             public DateTime Date { get; set; }
+
+            
         }
     }
 }

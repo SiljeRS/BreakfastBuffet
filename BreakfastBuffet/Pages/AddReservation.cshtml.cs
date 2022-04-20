@@ -47,6 +47,9 @@ namespace BreakfastBuffet.Pages
             
             await _context.SaveChangesAsync();
 
+            // SIGNALR
+           // await _expenseHubContext.Clients.All.ExpenseUpdate(expense);
+
             return RedirectToPage("Reception");
             
         }

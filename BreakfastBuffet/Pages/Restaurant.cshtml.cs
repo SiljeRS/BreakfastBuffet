@@ -20,7 +20,7 @@ namespace BreakfastBuffet.Pages
         public RestaurantModel(MyDbContext context)
         {
             _context = context;
-            _myCheckInOverview = new CheckInOverview();
+            //_myCheckInOverview = new CheckInOverview();
             
         }
 
@@ -38,6 +38,7 @@ namespace BreakfastBuffet.Pages
             reservation.NrAdults = Input.NrOfAdults;
 
             var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == DateTime.Now.Day).FirstOrDefault();
+
             if(myCheckInOverview == null)
             {
                 myCheckInOverview = new CheckInOverview();
@@ -48,21 +49,16 @@ namespace BreakfastBuffet.Pages
 
             _context.SaveChanges();
 
-
-
-            //_context.CheckInOverview.reservationsCheckedIn.Add(reservation);
-
-            //Tilføjer til liste er checkIns
-            //myCheckInOverview.reservationsCheckedIn.Add(reservation);
-
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            // SIGNALR
+            //await _expenseHubContext.Clients.All.ExpenseUpdate(expense);
 
-            return RedirectToPage("Success");
+
+            return RedirectToPage("Succes");
         }
 
         public class InputModel
