@@ -43,6 +43,7 @@ namespace BreakfastBuffet.Pages
             {
                 myCheckInOverview = new CheckInOverview();
                 myCheckInOverview.reservationsCheckedIn = new List<Reservation>();
+                myCheckInOverview.Date = DateTime.Now;
                 _context.CheckInOverview.Add(myCheckInOverview);
 
                 Console.WriteLine("Den er null");

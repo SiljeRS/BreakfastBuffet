@@ -23,7 +23,6 @@ namespace BreakfastBuffet.Pages
                 .Select(x => x.reservationsCheckedIn)
                 .FirstOrDefault();
             //if(CheckInOverview == null)
-
         }
     }
 }
