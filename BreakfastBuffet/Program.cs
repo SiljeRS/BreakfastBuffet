@@ -18,11 +18,11 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("ReceptionOnly",
         policyBuilder => policyBuilder
-        .RequireClaim("ReceptionNumber"));
+        .RequireClaim("IsReceptionist"));
 
     options.AddPolicy("RestaurantOnly",
         policyBuilder => policyBuilder
-        .RequireClaim("RestaurantNumber"));
+        .RequireClaim("IsWaiter"));
 });
 
 builder.Services.AddRazorPages();
@@ -51,6 +51,14 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+    if (userManager != null)
+        SeedData.SeedUsers(userManager);
+    else throw new Exception("Unable to get UserManager!");
+}
 app.MapHub<KitchenHub>("/kitchenHub");
 
 app.Run();
