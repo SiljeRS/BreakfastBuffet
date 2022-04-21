@@ -6,9 +6,11 @@ using BreakfastBuffet.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.SignalR;
 using BreakfastBuffet.Hubs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BreakfastBuffet.Pages
 {
+    [Authorize(Policy = "ReceptionOnly")]
     public class AddReservationModel : PageModel
     {
         private readonly MyDbContext _context;

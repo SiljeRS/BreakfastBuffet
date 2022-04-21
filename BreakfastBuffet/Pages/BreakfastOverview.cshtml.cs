@@ -4,9 +4,11 @@ using BreakfastBuffet.Data;
 using BreakfastBuffet.Models;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BreakfastBuffet.Pages
 {
+    [Authorize(Policy = "ReceptionOnly")]
     public class BreakfastOverviewModel : PageModel
     {
         private readonly MyDbContext _context;

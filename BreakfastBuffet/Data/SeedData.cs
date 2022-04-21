@@ -7,12 +7,6 @@ namespace BreakfastBuffet.Data
     {
         public static void SeedUsers(UserManager<IdentityUser> userManager)
         {
-            /*
-            const string adminEmail = "Admin@localhost";
-            const string adminPassword = "Secret7$";
-            if (userManager == null)
-                throw new ArgumentNullException(nameof(userManager));
-            */
 
             const string receptionistEmail = "Receptionist@localhost";
             const string receptionistPassword = "Secret7$";

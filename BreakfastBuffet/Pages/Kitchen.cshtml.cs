@@ -22,9 +22,6 @@ namespace BreakfastBuffet.Pages
         public int _amountOfAdultsCheckedIn;
         public int _amountOfChildrenCheckedIn;
 
-        //public DateTime _Recentdate = DateTime.Now;
-
-
         public KitchenModel(MyDbContext context, IHubContext<KitchenHub, IKitchen> kitchenHubContext)
         {
             _context = context;
@@ -33,52 +30,65 @@ namespace BreakfastBuffet.Pages
 
         public async Task OnPost()
         {
-            //Expected
-            //var myBreakfast = _context.Breakfast.Where(p => p.Date.Day == Input.Date.Day).FirstOrDefault();
             var myBreakfast = await GetBreakfast(Input.Date);
 
-            _expectedAmountOfAdults = myBreakfast.NAdults;
-            _expectedAmountOfChildren = myBreakfast.NChildren;
-
-            _expectedAmountOfPeople = _expectedAmountOfAdults + _expectedAmountOfChildren;
-
-            //Checked In 
-            //var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == Input.Date.Day).Include(x => x.reservationsCheckedIn).FirstOrDefault();
-            var myCheckInOverview = await GetCheckinOverview(Input.Date);
-
-            foreach (Reservation reservation in myCheckInOverview.reservationsCheckedIn)
+            if (myBreakfast != null)
             {
-                _amountOfAdultsCheckedIn += reservation.NrAdults;
-                _amountOfChildrenCheckedIn += reservation.NrChildren;
+                _expectedAmountOfAdults = myBreakfast.NAdults;
+                _expectedAmountOfChildren = myBreakfast.NChildren;
+
+                _expectedAmountOfPeople = _expectedAmountOfAdults + _expectedAmountOfChildren;
+            }
+            else
+            {
+                ModelState.AddModelError("Input.Date", "There are no expected guests on the chosen date");
             }
 
-
-            //_kitchenHubContext.Clients.All.KitchenInfoUpdate();
+            var myCheckInOverview = await GetCheckinOverview(Input.Date);
+            if (myCheckInOverview != null)
+            {
+                foreach (Reservation reservation in myCheckInOverview.reservationsCheckedIn)
+                {
+                    _amountOfAdultsCheckedIn += reservation.NrAdults;
+                    _amountOfChildrenCheckedIn += reservation.NrChildren;
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("Input.Date", "There are no checked-in guests on the chosen date");
+            }
 
         }
         
         public async Task OnGet()
         {
-            //Expected
-            //var myBreakfast = _context.Breakfast.Where(p => p.Date.Day == DateTime.Now.Day).FirstOrDefault();
             var myBreakfast = await GetBreakfast(Input.Date);
-
-            _expectedAmountOfAdults = myBreakfast.NAdults;
-            _expectedAmountOfChildren = myBreakfast.NChildren;
-
-            _expectedAmountOfPeople = _expectedAmountOfAdults + _expectedAmountOfChildren;
-
-            //Checked In 
-            //var myCheckInOverview = _context.CheckInOverview.Where(p => p.Date.Day == _Recentdate.Day).Include(x => x.reservationsCheckedIn).FirstOrDefault();
-            var myCheckInOverview = await GetCheckinOverview(DateTime.Now);
-
-            foreach (Reservation reservation in myCheckInOverview.reservationsCheckedIn)
+            if(myBreakfast != null )
             {
-                _amountOfAdultsCheckedIn += reservation.NrAdults;
-                _amountOfChildrenCheckedIn += reservation.NrChildren;
+                _expectedAmountOfAdults = myBreakfast.NAdults;
+                _expectedAmountOfChildren = myBreakfast.NChildren;
+
+                _expectedAmountOfPeople = _expectedAmountOfAdults + _expectedAmountOfChildren;
+            }
+            else
+            {
+                ModelState.AddModelError("Input.Date", "There are no expected guests on the chosen date");
             }
 
-
+            var myCheckInOverview = await GetCheckinOverview(DateTime.Now);
+            if(myCheckInOverview != null)
+            {
+                foreach (Reservation reservation in myCheckInOverview.reservationsCheckedIn)
+                {
+                    _amountOfAdultsCheckedIn += reservation.NrAdults;
+                    _amountOfChildrenCheckedIn += reservation.NrChildren;
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("Input.Date", "There are no checked-in guests on the chosen date");
+            }
+            
         }
         
         private async Task<Breakfast?> GetBreakfast(DateTime date)

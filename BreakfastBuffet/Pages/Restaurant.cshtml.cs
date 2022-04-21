@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using BreakfastBuffet.Hubs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BreakfastBuffet.Pages
 {
-  public class RestaurantModel : PageModel
+    [Authorize(Policy = "RestaurantOnly")]
+    public class RestaurantModel : PageModel
     {
         
         [BindProperty]
