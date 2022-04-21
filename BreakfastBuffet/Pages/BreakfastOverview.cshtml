@@ -21,20 +21,17 @@
     </thead>
 
     <tbody>
-        @foreach(var reservation in Model.CheckInOverviewList)
-{
-    <tr>
-            <td>
-                @Html.DisplayFor(modelCheckInOverviewList => reservation.RoomNr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelCheckInOverviewList => reservation.NrAdults)
-            </td>
-            <td>
-                @Html.DisplayFor(modelCheckInOverviewList => reservation.NrChildren)
-            </td>
-        </tr>
-}
+        @if(Model.CheckInOverviewList != null)
+        {
+            @foreach(var reservation in Model.CheckInOverviewList)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelCheckInOverviewList => reservation.RoomNr)</td>
+                    <td>@Html.DisplayFor(modelCheckInOverviewList => reservation.NrAdults)</td>
+                    <td>@Html.DisplayFor(modelCheckInOverviewList => reservation.NrChildren)</td>
+                </tr>
+            }           
+        }
         
     </tbody>
 </table>
