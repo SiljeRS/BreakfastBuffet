@@ -38,7 +38,7 @@ namespace BreakfastBuffet.Pages
                 Breakfast breakfast = new Breakfast();
 
                 breakfast.Date = Input.Date;
-                if (Input.Date < DateTime.Now)
+                if (Input.Date.Day < DateTime.Now.Day)
                 {
                     ModelState.AddModelError("Input.Date", "Date must be in the future");
                     return Page();
